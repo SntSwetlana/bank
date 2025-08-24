@@ -29,33 +29,26 @@ fn println_bank( bank:Bank) -> Bank {
     println!("{:#?}", bank);
     bank
 }
-fn println_account( account:Account) -> Account{
+fn println_account( account: &Account) {
     println!("{:#?}", account);
-    account
 }
 
-
-fn println_accounts( accounts:Vec<Account>) -> Vec<Account>{
-    println!("{:#?}", accounts);
-    accounts
+fn print_num_account(bank: &Bank) {
+    println!("Num {:#?}", bank.accounts.len());
 }
 
 fn main() {
     let mut bank = Bank::new();
-    let mut account = Account::new(1, String::from("Alice"));
-    account.balance = 100;
-    account = println_account(account);
-    account = println_account(account);
+    let account1 = Account::new(1, String::from("Alice"));
+    let account2 = Account::new(1, String::from("Who is Alice"));
+    let account3 = Account::new(1, String::from("Who is fucking Alice"));
+    bank.accounts.push(account1);
+    bank.accounts.push(account2);
+    bank = println_bank(bank);
+    print_num_account(&bank);
+    let account_ref = &account3;
+    println_account(account_ref);
+    println!("{:#?}", account_ref.holder);
 
-
-    bank.accounts.push(Account::new(1, String::from("Alice")));
-    bank.accounts.push(Account::new(4, String::from("Bill")));
-    bank.accounts.push(Account::new(5, String::from("Ivy")));
-
-    bank.accounts = println_accounts(bank.accounts);
-    bank.accounts = println_accounts(bank.accounts);
-
-    println_bank(bank);
-    
 }
 
